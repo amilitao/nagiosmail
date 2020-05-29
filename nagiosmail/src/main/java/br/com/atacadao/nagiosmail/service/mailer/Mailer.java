@@ -7,9 +7,11 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.stereotype.Service;
 
 import br.com.atacadao.nagiosmail.model.Email;
 
+@Service
 public class Mailer {
 
 	private JavaMailSender javaMailSender = Sender.getMailSender();
