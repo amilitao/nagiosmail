@@ -8,6 +8,7 @@ import br.com.atacadao.nagiosmail.service.impl.CorreioCsc;
 public class Main {
 
 	public static void main(String[] args) {
+		
 
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
 				Main.class.getPackage().getName());
