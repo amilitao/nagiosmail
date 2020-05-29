@@ -7,7 +7,7 @@ import br.com.atacadao.nagiosmail.service.CorreioService;
 import br.com.atacadao.nagiosmail.service.mailer.Mailer;
 
 @Service
-public class CorreioCsc implements CorreioService {
+public class Csc implements CorreioService {
 
 	@Override
 	public void enviar(String[] args) {
