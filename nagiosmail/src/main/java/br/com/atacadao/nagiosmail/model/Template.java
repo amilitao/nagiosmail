@@ -24,11 +24,8 @@ public class Template {
 		String texto = this.getConteudo();
 
 		for (int a = 4; a < args.length; a++) {
-			String[] vars = args[a].split(":");
 			
-			System.out.println("Alterando " + vars[0]);
-			System.out.println(" para " + vars[1]);
-			
+			String[] vars = args[a].split(":");			
 			texto = texto.replace(vars[0], vars[1]);
 		}
 

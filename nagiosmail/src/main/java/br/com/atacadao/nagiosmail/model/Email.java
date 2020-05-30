@@ -14,7 +14,7 @@ public class Email {
 		public String getFrom() {
 			return from;
 		}
-		public void setFrom(String from) {
+		public void setFrom(String from) {			
 			this.from = from;
 		}			
 		
@@ -33,7 +33,7 @@ public class Email {
 		public String getContent() {
 			return content;
 		}
-		public void setContent(String content) {
+		public void setContent(String content) {			
 			this.content = content;
 		}	
 		

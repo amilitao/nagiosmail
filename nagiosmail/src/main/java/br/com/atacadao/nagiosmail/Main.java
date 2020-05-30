@@ -10,8 +10,8 @@ import br.com.atacadao.nagiosmail.service.mailer.Mailer;
 
 public class Main {
 
-	public static void main(String[] args) {		
-
+	public static void main(String[] args) {
+		
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
 				Main.class.getPackage().getName());		
 
@@ -33,9 +33,8 @@ public class Main {
 			template.adicionaValores(args);
 			email.setContent(template.getConteudo());
 			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException e) {			
+			System.out.println(e.getMessage());
 		}			
 
 		//mailer.sendEmailHtml(email);
