@@ -1,46 +1,53 @@
 package br.com.atacadao.nagiosmail;
 
-import java.io.IOException;
+import java.util.Arrays;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
+import br.com.atacadao.nagiosmail.model.Correio;
+import br.com.atacadao.nagiosmail.model.DadosDeEntrada;
 import br.com.atacadao.nagiosmail.model.Email;
 import br.com.atacadao.nagiosmail.model.Template;
-import br.com.atacadao.nagiosmail.service.mailer.Mailer;
 
 public class Main {
 
+	// "-f", "srvnagiosprd",
+	// "-t", "adrianomilitao@atacadao.com.br",
+	// "-s", "Teste",
+	// "-h", "template.html",
+	// "-p", "var1:$VAR" };
+
 	public static void main(String[] args) {
 		
-		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-				Main.class.getPackage().getName());		
+		String[] vars = {
+		 "-f", "srvnagiosprd",
+		 "-t", "adrianomilitao@atacadao.com.br",
+		 "-s", "Teste",
+		 "-h", "template.html",
+		 "-p", "var1:$VAR" };
 
-		String[] v = {"from","to","subject","template-csc.html", "var1:$VAR"};
-		args = v;		
-		
-		Email email = applicationContext.getBean(Email.class);
-		Mailer mailer = applicationContext.getBean(Mailer.class);			
-	
-		
-		email.setFrom(args[0]);
-		email.setTo(args[1]);
-		email.setSubject(args[2]);
-		
-		Template template = new Template(args[3]);		
-		
-		try {			
+		DadosDeEntrada dados = new DadosDeEntrada(Arrays.asList(vars));
+		Correio correio = new Correio();
+		Email email = new Email();
+
+		try {
 			
-			template.adicionaValores(args);
-			email.setContent(template.getConteudo());
+			Template template = new Template(
+					dados.getParametros("-h").get(0).getValor(), dados.getParametros("-p"));
+
+
+			email.setFrom(dados.getParametros("-f").get(0).getValor());
+			email.setTo(dados.getParametros("-t").get(0).getValor());
+			email.setSubject(dados.getParametros("-s").get(0).getValor());
+			email.setContent(template.getConteudoAlterado());
+
+			correio.enviar(email);
 			
-		} catch (IOException e) {			
-			System.out.println(e.getMessage());
-		}	
+			System.out.println("Enviado com sucesso");
 
-
-		//mailer.sendEmailHtml(email);
-
-		applicationContext.close();
+		} catch (Exception e) {
+			System.out.println("Erro no sistema: " + e);
+		}
+		
+		
 
 	}
 

@@ -1,8 +1,5 @@
 package br.com.atacadao.nagiosmail.model;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class Email {
 		
 	    private String from;

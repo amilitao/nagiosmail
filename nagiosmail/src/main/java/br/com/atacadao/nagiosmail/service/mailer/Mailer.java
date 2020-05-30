@@ -7,23 +7,22 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-import org.springframework.stereotype.Service;
 
 import br.com.atacadao.nagiosmail.model.Email;
 
-@Service
+
 public class Mailer {
 
 	private JavaMailSender javaMailSender = Sender.getMailSender();
 	
 
-	public void sendEmail(Email msg) {
+	public void sendEmail(Email email) {
 
 		MimeMessagePreparator preparator;
 
 		try {
 
-			preparator = getContentAsInlineResourceMessagePreparator(msg);
+			preparator = getContentAsInlineResourceMessagePreparator(email);
 			javaMailSender.send(preparator);
 
 		} catch (MailException ex) {
@@ -43,13 +42,14 @@ public class Mailer {
 			
 				helper.setFrom(email.getFrom());
 				helper.setTo(email.getTo());
-				helper.setSubject(email.getSubject());
+				helper.setSubject(email.getSubject());		
 				
 				// Add an inline resource.
 				// use the true flag to indicate you need a multipart message
-				helper.setText(email.getContent(), true);
-
-				helper.addInline("identifier1234", new ClassPathResource("/images/logo_atacadao.png"));
+				helper.setText(email.getContent(), true);				
+				
+				helper.addInline("logo", new ClassPathResource("./images/logo_atacadao.png"));
+			
 			}
 		};
 		return preparator;
