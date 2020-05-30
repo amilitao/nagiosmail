@@ -12,7 +12,7 @@ public class Main {
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
 				Main.class.getPackage().getName());
 
-		String nomeDaClasse = "CorreioCsc";
+		String nomeDaClasse = "Csc";
 
 		try {
 			Class<?> classe = Class.forName("br.com.atacadao.nagiosmail.service.impl." + nomeDaClasse);
