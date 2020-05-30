@@ -28,6 +28,11 @@ public class DadosDeEntrada {
 		return procurados;
 	}
 
+	@Override
+	public String toString() {
+		return "DadosDeEntrada [parametros=" + parametros + "]";
+	}
+
 	
 
 }

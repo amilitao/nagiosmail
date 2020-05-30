@@ -1,8 +1,10 @@
 package br.com.atacadao.nagiosmail.service.mailer;
 
+import java.io.File;
+
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -48,7 +50,8 @@ public class Mailer {
 				// use the true flag to indicate you need a multipart message
 				helper.setText(email.getContent(), true);				
 				
-				helper.addInline("logo", new ClassPathResource("./images/logo_atacadao.png"));
+				FileSystemResource res = new FileSystemResource(new File("/usr/local/nagiosql/nagiosmail/images/logo.png"));
+				helper.addInline("logo", res);
 			
 			}
 		};

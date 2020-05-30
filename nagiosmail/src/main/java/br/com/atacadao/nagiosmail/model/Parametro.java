@@ -28,6 +28,13 @@ public class Parametro {
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
+
+	@Override
+	public String toString() {
+		return "Parametro [tipo=" + tipo + ", valor=" + valor + "]";
+	}
+	
+	
 	
 	
 

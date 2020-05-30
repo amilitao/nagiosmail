@@ -17,7 +17,7 @@ public class Template {
 
 	public Template(String fileName, List<Parametro> vars) {
 		this.variaveis = vars;
-		this.path = Paths.get("c:/home/templates/" + fileName);
+		this.path = Paths.get("/usr/local/nagiosql/nagiosmail/templates/" + fileName);
 
 	}
 

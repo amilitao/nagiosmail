@@ -32,7 +32,13 @@ public class Email {
 		}
 		public void setContent(String content) {			
 			this.content = content;
+		}
+		@Override
+		public String toString() {
+			return "Email [from=" + from + ", to=" + to + ", subject=" + subject + "]";
 		}	
+		
+		
 		
 
 	

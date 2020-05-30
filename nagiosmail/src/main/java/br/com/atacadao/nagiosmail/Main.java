@@ -9,22 +9,14 @@ import br.com.atacadao.nagiosmail.model.Template;
 
 public class Main {
 
-	// "-f", "srvnagiosprd",
-	// "-t", "adrianomilitao@atacadao.com.br",
-	// "-s", "Teste",
-	// "-h", "template.html",
-	// "-p", "var1:$VAR" };
-
 	public static void main(String[] args) {
-		
-		String[] vars = {
-		 "-f", "srvnagiosprd",
-		 "-t", "adrianomilitao@atacadao.com.br",
-		 "-s", "Teste",
-		 "-h", "template.html",
-		 "-p", "var1:$VAR" };
+		/*
+		 * String[] vars = { "-f", "srvnagiosprd", "-t",
+		 * "adrianomilitao@atacadao.com.br", "-s", "Teste", "-h", "template.html", "-p",
+		 * "var1:adriano", "-p", "var2:alves" };
+		 */
 
-		DadosDeEntrada dados = new DadosDeEntrada(Arrays.asList(vars));
+		DadosDeEntrada dados = new DadosDeEntrada(Arrays.asList(args));
 		Correio correio = new Correio();
 		Email email = new Email();
 
@@ -39,11 +31,13 @@ public class Main {
 			email.setSubject(dados.getParametros("-s").get(0).getValor());
 			email.setContent(template.getConteudoAlterado());
 
-			correio.enviar(email);
+			correio.enviar(email);	
 			
-			System.out.println("Enviado com sucesso");
+			System.out.println("Email enviado!: " + email);
+			System.out.println(" DADOS: " + dados);
 
 		} catch (Exception e) {
+			
 			System.out.println("Erro no sistema: " + e);
 		}
 		
