@@ -7,31 +7,19 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.stereotype.Service;
 
 import br.com.atacadao.nagiosmail.model.Email;
 
+@Service
 public class Mailer {
 
 	private JavaMailSender javaMailSender = Sender.getMailSender();
+	
 
 	public void sendEmail(Email msg) {
 
-		MimeMessagePreparator preparator = getContentWtihAttachementMessagePreparator(msg);
-
-		try {
-
-			javaMailSender.send(preparator);
-
-		} catch (MailException ex) {
-			System.out.println(ex.getMessage());
-
-		}
-
-	}
-
-	public void sendEmailHtml(Email msg) {
-
-		MimeMessagePreparator preparator = getContentWtihAttachementMessagePreparator(msg);
+		MimeMessagePreparator preparator;
 
 		try {
 
@@ -44,23 +32,7 @@ public class Mailer {
 		}
 	
 	}
-
-	private MimeMessagePreparator getContentWtihAttachementMessagePreparator(Email msg) {
-
-		MimeMessagePreparator preparator = new MimeMessagePreparator() {
-
-			public void prepare(MimeMessage mimeMessage) throws Exception {
-				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-				
-				helper.setFrom(msg.getFrom());
-				helper.setTo(msg.getTo());
-				helper.setSubject(msg.getSubject());
-				helper.setText(msg.getContent());
-
-			}
-		};
-		return preparator;
-	}
+	
 
 	private MimeMessagePreparator getContentAsInlineResourceMessagePreparator(Email email) {
 
