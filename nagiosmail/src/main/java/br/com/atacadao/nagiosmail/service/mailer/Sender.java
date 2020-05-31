@@ -6,7 +6,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 public class Sender {
-	
+		
 	
 	public static JavaMailSender getMailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

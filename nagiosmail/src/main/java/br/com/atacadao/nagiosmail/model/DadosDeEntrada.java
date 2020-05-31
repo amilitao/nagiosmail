@@ -15,13 +15,13 @@ public class DadosDeEntrada {
 
 	}
 
-	public List<Parametro> getParametros(String t) {
+	public List<String> get(String t) {
 
-		List<Parametro> procurados = new ArrayList<Parametro>();
+		List<String> procurados = new ArrayList<String>();
 
 		for (Parametro p : parametros) {
 			if (p.getTipo().equals(t)) {
-				procurados.add(p);
+				procurados.add(p.getValor());
 			}
 		}
 
@@ -32,7 +32,5 @@ public class DadosDeEntrada {
 	public String toString() {
 		return "DadosDeEntrada [parametros=" + parametros + "]";
 	}
-
-	
 
 }
