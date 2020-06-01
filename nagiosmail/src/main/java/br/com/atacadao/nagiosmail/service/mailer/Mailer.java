@@ -1,12 +1,10 @@
 package br.com.atacadao.nagiosmail.service.mailer;
 
-import java.io.File;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.MailException;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -27,15 +25,8 @@ public class Mailer implements Correio {
 
 		MimeMessagePreparator preparator;
 
-		try {
-
-			preparator = getContentAsInlineResourceMessagePreparator(email);
-			//javaMailSender.send(preparator);
-
-		} catch (MailException ex) {
-			System.out.println(ex.getMessage());
-
-		}
+		preparator = getContentAsInlineResourceMessagePreparator(email);
+		javaMailSender.send(preparator);
 
 	}
 
@@ -61,9 +52,13 @@ public class Mailer implements Correio {
 
 						String[] paramImages = s.split(":");
 
-						FileSystemResource res = new FileSystemResource(
-								new File("/usr/local/nagiosql/nagiosmail/images/" + paramImages[1]));
-						helper.addInline(paramImages[0], res);
+						ClassPathResource cpr = new ClassPathResource("images/" + paramImages[1]);
+
+						/*
+						 * FileSystemResource res = new FileSystemResource( new
+						 * File("/usr/local/nagiosql/nagiosmail/images/" + paramImages[1]));
+						 */
+						helper.addInline(paramImages[0], cpr);
 
 					}
 

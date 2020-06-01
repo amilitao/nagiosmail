@@ -1,8 +1,5 @@
 package br.com.atacadao.nagiosmail.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Email {
 
 	private String from;

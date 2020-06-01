@@ -14,15 +14,16 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		  String[] vars = { "-f", "srvnagiosprd", "-t",
-		  "adrianomilitao@atacadao.com.br", "-s", "Teste", "-h", "template.html", "-p",
-		  "var1:adriano", "-p", "var2:alves" }; 
-		  
-		 			
+		/*
+		 * String[] vars = { "-f", "nagios@srvnagiosprd.localdomain", "-t",
+		 * "adrianomilitao@atacadao.com.br", "-s", "Teste", "-h", "template-csc.html",
+		 * "-m", "var1:adriano", "-m", "var2:alves", "-i", "logo:logo.png" };
+		 * 
+		 */	
 
 		try {
 			
-			DadosDeEntrada dados = new DadosDeEntrada(Arrays.asList(vars));
+			DadosDeEntrada dados = new DadosDeEntrada(Arrays.asList(args));
 			Correio correio = new Mailer(Sender.getMailSender());
 			
 			String from = dados.get("-f").get(0);
