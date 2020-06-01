@@ -13,17 +13,17 @@ import br.com.atacadao.nagiosmail.service.mailer.Sender;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		
-		  String[] vars = { "-f", "nagios@srvnagiosprd.localdomain", "-t",
-		  "adrianomilitao@atacadao.com.br", "-s", "Teste", "-h", "template-csc.html",
-		  "-m", "var1:adriano", "-m", "var2:alves", "-i", "logo:logo.png" };
-		  
-		 	
+		/*
+		 * 
+		 * String[] vars = { "-f", "nagios@srvnagiosprd.localdomain", "-t",
+		 * "adrianomilitao@atacadao.com.br", "-s", "Teste", "-h", "template-csc.html",
+		 * "-m", "var1:adriano", "-m", "var2:alves", "-i", "logo:logo.png" };
+		 * 
+		 */
 
 		try {
 			
-			DadosDeEntrada dados = new DadosDeEntrada(Arrays.asList(vars));
+			DadosDeEntrada dados = new DadosDeEntrada(Arrays.asList(args));
 			Correio correio = new Mailer(Sender.getMailSender());
 			
 			String from = dados.get("-f").get(0);
@@ -39,12 +39,12 @@ public class Main {
 			
 			correio.send(email);	
 			
-			System.out.println("Email enviado!: " + email);
-			System.out.println(" DADOS: " + dados);
+			System.out.println("RESULTADO: Email enviado com sucesso!");
+			System.out.println("DADOS: " + dados);
 
 		} catch (Exception e) {
 			
-			System.out.println("Erro no sistema: " + e);
+			System.out.println("RESULTADO: Erro no sistema - " + e);
 		}
 		
 		
