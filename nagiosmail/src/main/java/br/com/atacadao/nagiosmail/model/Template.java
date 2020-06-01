@@ -1,16 +1,15 @@
 package br.com.atacadao.nagiosmail.model;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.util.ResourceUtils;
+import org.springframework.core.io.FileSystemResource;
 
 public class Template {
 
@@ -28,9 +27,10 @@ public class Template {
 
 	public String getConteudo() throws IOException {
 
-		Path path = ResourceUtils.getFile("classpath:templates/" + this.fileName).toPath();
+		FileSystemResource res = new FileSystemResource(
+				new File("/usr/local/nagiosql/nagiosmail/templates/" + fileName ));
 
-		String texto = new String(Files.readAllBytes(path), charset);
+		String texto = new String(Files.readAllBytes(Paths.get(res.getPath())), charset);
 
 		for (String valor : macros) {
 
