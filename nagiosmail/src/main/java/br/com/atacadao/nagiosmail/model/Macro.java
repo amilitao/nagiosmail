@@ -1,15 +1,15 @@
 package br.com.atacadao.nagiosmail.model;
 
-public class Parametro {
+public class Macro {
 	
 	private String tipo;
 	private String valor;
 	
 	
-	public Parametro() {		
+	public Macro() {		
 	}
 	
-	public Parametro(String tipo, String valor) {
+	public Macro(String tipo, String valor) {
 		this.tipo = tipo;
 		this.valor = valor;
 	}	

@@ -1,16 +1,20 @@
 package br.com.atacadao.nagiosmail.model;
 
+import java.util.List;
+
 public class Email {
 
 	private String from = "nagios@srvnagiosprd.localdomain";
-	private String to;
+	private List<String> to;
 	private String subject;
 	private Template template;
+	private String[] images;
 
-	public Email(String to, String subject, Template template) {
-		this.to = to;
+	public Email(List<String> to, String subject, Template template) {
+		this.to = to;	
 		this.subject = subject;
 		this.template = template;
+		this.images = template.getImages();
 		
 	}
 
@@ -20,13 +24,13 @@ public class Email {
 
 	public void setFrom(String from) {
 		this.from = from;
-	}
-
-	public String getTo() {
+	}	
+	
+	public List<String> getTo() {
 		return to;
 	}
 
-	public void setTo(String to) {
+	public void setTo(List<String> to) {
 		this.to = to;
 	}
 
@@ -44,6 +48,15 @@ public class Email {
 
 	public void setTemplate(Template template) {
 		this.template = template;
+	}	
+	
+
+	public String[] getImages() {
+		return images;
+	}
+
+	public void setImages(String[] images) {
+		this.images = images;
 	}
 
 	@Override

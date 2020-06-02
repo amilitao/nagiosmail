@@ -1,7 +1,6 @@
-package br.com.atacadao.nagiosmail.service.mailer;
+package br.com.atacadao.nagiosmail.service.mail;
 
 import java.io.File;
-import java.util.List;
 
 import javax.mail.internet.MimeMessage;
 
@@ -27,7 +26,7 @@ public class Mailer implements Correio {
 		MimeMessagePreparator preparator;
 
 		preparator = getContentAsInlineResourceMessagePreparator(email);
-		javaMailSender.send(preparator);
+		//javaMailSender.send(preparator);
 
 	}
 
@@ -38,39 +37,32 @@ public class Mailer implements Correio {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 
 				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-				
+
 				helper.setFrom(email.getFrom());
 
-				String[] contatos = email.getTo().split(",");
-
-				for (String address : contatos) {
-					address = address.trim();
-					helper.addTo(address);
+				for (String to : email.getTo()) {
+					helper.addTo(to);
 				}
 
 				helper.setSubject(email.getSubject());
 
 				// Add an inline resource.
 				// use the true flag to indicate you need a multipart message
-				helper.setText(email.getTemplate().getConteudo(), true);
+				helper.setText(email.getTemplate().getHtml(), true);
 
-				List<String> images = email.getTemplate().getImages();
-				if (!images.isEmpty()) {
+				// adicionando imagens ao html
+				for (String name : email.getTemplate().getImages()) {
 
-					for (String s : images) {
+					FileSystemResource res = new FileSystemResource(
+							new File("c:/usr/local/nagiosql/nagiosmail/images/" + name));
 
-						String[] paramImages = s.split(":");
-						FileSystemResource res = new FileSystemResource(
-								new File("c:/usr/local/nagiosql/nagiosmail/images/" + paramImages[1]));
-
-						helper.addInline(paramImages[0], res);
-
-					}
+					helper.addInline(name, res);
 
 				}
 
 			}
 		};
+
 		return preparator;
 	}
 

@@ -14,54 +14,47 @@ import org.springframework.core.io.FileSystemResource;
 public class Template {
 
 	private String fileName;
-	private List<String> macros = new ArrayList<String>();
-	private List<String> images = new ArrayList<String>();
+	private List<Macro> macros = new ArrayList<>();	
 	private Charset charset = StandardCharsets.UTF_8;
 
-	public Template(String fileName, List<String> macros, List<String> images) {
-		this.macros = macros;
-		this.images = images;
+	public Template(String fileName, List<Macro> macros) {		
 		this.fileName = fileName;	
-
+		this.macros = macros;
 	}
 
-	public String getConteudo() throws IOException {		
+	public String getHtml() throws IOException {		
 
 		FileSystemResource res = new FileSystemResource(
 				new File("c:/usr/local/nagiosql/nagiosmail/templates/" + fileName ));
 
 		String texto = new String(Files.readAllBytes(Paths.get(res.getPath())), charset);
 
-		for (String valor : macros) {
-
-			String[] var = valor.split(":");
-			
-			if(var[0].equals("NOTIFICATIONTYPE")) {				
-				texto = texto.replace("NOTIFICATIONCOLOR", getCorParaNotificacao(var[1]));
-			}
-			
-			texto = texto.replace(var[0], var[1]);
-
+		for (Macro macro : macros) {			
+			texto = texto.replace(macro.getTipo(), macro.getValor());
 		}
 
 		return texto;
 
 	}
 
-	private String getCorParaNotificacao(String tipo) {
-		
+	/*
+	 * private String getCorParaNotificacao(String tipo) {
+	 * 
+	 * 
+	 * for(TipoNotificacao notificacao : TipoNotificacao.values() ) {
+	 * if(tipo.equals(notificacao.name())) { return notificacao.getCor(); } }
+	 * 
+	 * return "black"; }
+	 */
 
-		for(TipoNotificacao notificacao : TipoNotificacao.values() ) {
-			if(tipo.equals(notificacao.name())) {		
-				return notificacao.getCor();
-			}
-		}
+	public String[] getImages() {
 		
-		return "black";
-	}
-
-	public List<String> getImages() {
-		return images;
+		FileSystemResource res = new FileSystemResource(
+				new File("c:/usr/local/nagiosql/nagiosmail/images/"));
+		
+		return res.getFile().list();
+		
+		
 	}
 
 }

@@ -1,4 +1,4 @@
-package br.com.atacadao.nagiosmail.service.mailer;
+package br.com.atacadao.nagiosmail.service.mail;
 
 import java.util.Properties;
 
