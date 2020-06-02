@@ -36,10 +36,18 @@ public class Mailer implements Correio {
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 
 			public void prepare(MimeMessage mimeMessage) throws Exception {
+
 				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
 				helper.setFrom(email.getFrom());
-				helper.setTo(email.getTo());
+
+				String[] contatos = email.getTo().split(",");
+
+				for (String address : contatos) {
+					address = address.trim();
+					helper.addTo(address);
+				}
+
 				helper.setSubject(email.getSubject());
 
 				// Add an inline resource.
@@ -52,8 +60,9 @@ public class Mailer implements Correio {
 					for (String s : images) {
 
 						String[] paramImages = s.split(":");
-						FileSystemResource res = new FileSystemResource(new File("/usr/local/nagiosql/nagiosmail/images/" + paramImages[1] ));
-			
+						FileSystemResource res = new FileSystemResource(
+								new File("/usr/local/nagiosql/nagiosmail/images/" + paramImages[1]));
+
 						helper.addInline(paramImages[0], res);
 
 					}

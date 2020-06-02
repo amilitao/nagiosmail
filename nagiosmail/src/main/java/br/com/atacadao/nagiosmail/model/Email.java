@@ -2,13 +2,12 @@ package br.com.atacadao.nagiosmail.model;
 
 public class Email {
 
-	private String from;
+	private String from = "nagios@srvnagiosprd.localdomain";
 	private String to;
 	private String subject;
 	private Template template;
 
-	public Email(String from, String to, String subject, Template template) {
-		this.from = from;
+	public Email(String to, String subject, Template template) {
 		this.to = to;
 		this.subject = subject;
 		this.template = template;
