@@ -25,22 +25,39 @@ public class Template {
 
 	}
 
-	public String getConteudo() throws IOException {
+	public String getConteudo() throws IOException {		
 
 		FileSystemResource res = new FileSystemResource(
-				new File("/usr/local/nagiosql/nagiosmail/templates/" + fileName ));
+				new File("c:/usr/local/nagiosql/nagiosmail/templates/" + fileName ));
 
 		String texto = new String(Files.readAllBytes(Paths.get(res.getPath())), charset);
 
 		for (String valor : macros) {
 
 			String[] var = valor.split(":");
+			
+			if(var[0].equals("NOTIFICATIONTYPE")) {				
+				texto = texto.replace("NOTIFICATIONCOLOR", getCorParaNotificacao(var[1]));
+			}
+			
 			texto = texto.replace(var[0], var[1]);
 
 		}
 
 		return texto;
 
+	}
+
+	private String getCorParaNotificacao(String tipo) {
+		
+
+		for(TipoNotificacao notificacao : TipoNotificacao.values() ) {
+			if(tipo.equals(notificacao.name())) {		
+				return notificacao.getCor();
+			}
+		}
+		
+		return "black";
 	}
 
 	public List<String> getImages() {

@@ -14,10 +14,14 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		  
-		  String[] vars = { "-t", "adrianomilitao@atacadao.com.br, adriano.militao@yahoo.com.br", 
-		  "-s", "Teste", "-h", "template-csc.html",
-		  "-m", "var1:adriano", "-m", "var2:alves", "-i", "logo:logo.png" };
+		
+		  String[] vars = { 
+		   "-t", "adrianomilitao@atacadao.com.br",
+		   "-s", "Teste", 
+		   "-h", "template-padrao.html", 
+		   "-m", "NOTIFICATIONTYPE:PROBLEM", 
+		   "-i", "logoatac:logo-atacadao.jpg"};
+		 
 		  
 		 
 
@@ -42,7 +46,7 @@ public class Main {
 			System.out.println("DADOS: " + dados);
 
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 			System.out.println("RESULTADO: Erro no sistema - " + e);
 		}
 		
