@@ -27,17 +27,17 @@ public class DadosDeEntrada {
 	}
 
 	public String getTemplate() {
-		
+
 		String nameTemplate = "";
-		
-		if(dados.get(1).equals("host")) {
+
+		if (dados.get(1).equals("host")) {
 			nameTemplate = "template-host.html";
-		}else if(dados.get(1).equals("service")) {
+		} else if (dados.get(1).equals("service")) {
 			nameTemplate = "template-service.html";
-		}else {
+		} else {
 			System.out.println("parametro incorreto");
 		}
-		
+
 		return nameTemplate;
 	}
 
@@ -57,15 +57,31 @@ public class DadosDeEntrada {
 
 	public String getSubject() {
 
-		String var = "";
+		if (dados.get(1).equals("host")) {
+
+			return getMacro("NOTIFICATIONTYPE") + " Host Alert: " + getMacro("HOSTALIAS") + " " + getMacro("HOSTDESC")
+					+ " is " + getMacro("HOSTSTATE");
+
+		} else {
+
+			return getMacro("NOTIFICATIONTYPE") + " Service Alert: " + getMacro("HOSTALIAS") + " "
+					+ getMacro("SERVICEDESC") + " is " + getMacro("SERVICESTATE");
+		}
+
+	}
+
+	private String getMacro(String str) {
+
+		String macro = "";
 
 		for (Macro m : getMacros()) {
-			if (m.getTipo().equals("NOTIFICATIONTYPE")) {
-				var = m.getValor();
+			if (m.getTipo().equals(str)) {
+				macro = m.getValor();
 			}
 		}
 
-		return "Atenção: Notificação Nagios *** " + var;
+		return macro;
+
 	}
 
 	@Override

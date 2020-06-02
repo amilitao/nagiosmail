@@ -15,7 +15,7 @@ public class Main {
 		
 		  Correio correio = new Mailer(Sender.getMailSender());	
 		
-		  String[] vars = {"adrianomilitao@atacadao.com.br", "template-padrao.html", 
+		  String[] vars = {"adrianomilitao@atacadao.com.br", "host",  
 		  "NOTIFICATIONTYPE:PROBLEM"};		 
 
 		try {
