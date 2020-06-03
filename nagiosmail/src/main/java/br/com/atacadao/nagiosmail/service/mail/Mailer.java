@@ -1,7 +1,5 @@
 package br.com.atacadao.nagiosmail.service.mail;
 
-import java.io.File;
-
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.core.io.FileSystemResource;
@@ -46,23 +44,13 @@ public class Mailer implements Correio {
 
 				helper.setSubject(email.getSubject());
 
-				// Add an inline resource.
-				// use the true flag to indicate you need a multipart message
 				helper.setText(email.getTemplate().getHtml(), true);
 
-				// adicionando imagens ao html
-				String[] img = email.getTemplate().getImages();
-				if (img != null) {
-					for (String name : img) {
-
-						FileSystemResource res = new FileSystemResource(
-								new File("/usr/local/nagiosql/nagiosmail/images/" + name));
-
-						helper.addInline(name, res);
-
-					}
+				for (FileSystemResource res : email.getTemplate().getImages()) {
+					helper.addInline(res.getFilename(), res);
 				}
 			}
+
 		};
 
 		return preparator;

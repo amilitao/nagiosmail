@@ -26,7 +26,7 @@ public class DadosDeEntrada {
 
 	}
 
-	public String getTemplate() {
+	public String getNomeTemplate() {
 		return this.dados.get(2);
 	}
 
@@ -45,34 +45,21 @@ public class DadosDeEntrada {
 	}
 
 	public String getSubject() {
-
-		if (dados.get(1).equals("0")) {
-
-			return getMacro("NOTIFICATIONTYPE") + " Host Alert: " + getMacro("HOSTALIAS") + " " + getMacro("HOSTDESC")
-					+ " is " + getMacro("HOSTSTATE");
-
-		} else {
-
-			return getMacro("NOTIFICATIONTYPE") + " Service Alert: " + getMacro("SERVICEALIAS") + " "
-					+ getMacro("SERVICEDESC") + " is " + getMacro("SERVICESTATE");
-		}
-
+		return this.dados.get(1);
 	}
 
-	private String getMacro(String str) {
-
-		String macro = "";
-
-		for (Macro m : getMacros()) {
-			if (m.getTipo().equals(str)) {
-				macro = m.getValor();
-			}
-		}
-
-		return macro;
-
-	}
-
+	/*
+	 * private String getMacro(String str) {
+	 * 
+	 * String macro = "";
+	 * 
+	 * for (Macro m : getMacros()) { if (m.getTipo().equals(str)) { macro =
+	 * m.getValor(); } }
+	 * 
+	 * return macro;
+	 * 
+	 * }
+	 */
 	@Override
 	public String toString() {
 		return "DadosDeEntrada [parametros=" + dados + "]";
