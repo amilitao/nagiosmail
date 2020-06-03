@@ -15,14 +15,17 @@ public class Main {
 		
 		  Correio correio = new Mailer(Sender.getMailSender());	
 		
-		  String[] vars = {"adrianomilitao@atacadao.com.br", "host",  
-		  "NOTIFICATIONTYPE:PROBLEM"};		 
+			/*
+			 * String[] vars = {"adrianomilitao@atacadao.com.br", "0",
+			 * "template-host-1.html", "PROBLEM#NOTIFICATIONTYPE"};
+			 */
+			 
 
 		try {
 			
-			DadosDeEntrada dados = new DadosDeEntrada(Arrays.asList(vars));			
+			DadosDeEntrada dados = new DadosDeEntrada(Arrays.asList(args));			
 			
-			Template template = new Template(dados.getTemplate(), dados.getMacros());		
+			Template template = new Template(dados.getTemplate(), dados.getMacros());				
 			
 			Email email = new Email(
 					dados.getContatos(), dados.getSubject(), template);

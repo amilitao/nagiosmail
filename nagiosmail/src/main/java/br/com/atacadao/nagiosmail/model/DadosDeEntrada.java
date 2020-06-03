@@ -27,27 +27,16 @@ public class DadosDeEntrada {
 	}
 
 	public String getTemplate() {
-
-		String nameTemplate = "";
-
-		if (dados.get(1).equals("host")) {
-			nameTemplate = "template-host.html";
-		} else if (dados.get(1).equals("service")) {
-			nameTemplate = "template-service.html";
-		} else {
-			System.out.println("parametro incorreto");
-		}
-
-		return nameTemplate;
+		return this.dados.get(2);
 	}
 
 	public List<Macro> getMacros() {
 
 		List<Macro> lista = new ArrayList<Macro>();
 
-		for (String s : dados.subList(2, dados.size())) {
+		for (String s : dados.subList(3, dados.size())) {
 
-			String[] m = s.split(":");
+			String[] m = s.split("#");
 			lista.add(new Macro(m[0], m[1]));
 
 		}
@@ -57,14 +46,14 @@ public class DadosDeEntrada {
 
 	public String getSubject() {
 
-		if (dados.get(1).equals("host")) {
+		if (dados.get(1).equals("0")) {
 
 			return getMacro("NOTIFICATIONTYPE") + " Host Alert: " + getMacro("HOSTALIAS") + " " + getMacro("HOSTDESC")
 					+ " is " + getMacro("HOSTSTATE");
 
 		} else {
 
-			return getMacro("NOTIFICATIONTYPE") + " Service Alert: " + getMacro("HOSTALIAS") + " "
+			return getMacro("NOTIFICATIONTYPE") + " Service Alert: " + getMacro("SERVICEALIAS") + " "
 					+ getMacro("SERVICEDESC") + " is " + getMacro("SERVICESTATE");
 		}
 

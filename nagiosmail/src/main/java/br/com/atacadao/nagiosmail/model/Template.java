@@ -25,7 +25,7 @@ public class Template {
 	public String getHtml() throws IOException {		
 
 		FileSystemResource res = new FileSystemResource(
-				new File("c:/usr/local/nagiosql/nagiosmail/templates/" + fileName ));
+				new File("/usr/local/nagiosql/nagiosmail/templates/" + fileName ));
 
 		String texto = new String(Files.readAllBytes(Paths.get(res.getPath())), charset);
 

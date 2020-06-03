@@ -26,7 +26,7 @@ public class Mailer implements Correio {
 		MimeMessagePreparator preparator;
 
 		preparator = getContentAsInlineResourceMessagePreparator(email);
-		//javaMailSender.send(preparator);
+		javaMailSender.send(preparator);
 
 	}
 
@@ -51,15 +51,17 @@ public class Mailer implements Correio {
 				helper.setText(email.getTemplate().getHtml(), true);
 
 				// adicionando imagens ao html
-				for (String name : email.getTemplate().getImages()) {
+				String[] img = email.getTemplate().getImages();
+				if (img != null) {
+					for (String name : img) {
 
-					FileSystemResource res = new FileSystemResource(
-							new File("c:/usr/local/nagiosql/nagiosmail/images/" + name));
+						FileSystemResource res = new FileSystemResource(
+								new File("/usr/local/nagiosql/nagiosmail/images/" + name));
 
-					helper.addInline(name, res);
+						helper.addInline(name, res);
 
+					}
 				}
-
 			}
 		};
 

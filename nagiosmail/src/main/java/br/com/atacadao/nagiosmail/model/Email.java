@@ -1,5 +1,6 @@
 package br.com.atacadao.nagiosmail.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Email {
@@ -61,7 +62,10 @@ public class Email {
 
 	@Override
 	public String toString() {
-		return "Email [from=" + from + ", to=" + to + ", subject=" + subject + "]";
+		return "Email [from=" + from + ", to=" + to + ", subject=" + subject + ", template=" + template + ", images="
+				+ Arrays.toString(images) + "]";
 	}
 
+	
+	
 }
