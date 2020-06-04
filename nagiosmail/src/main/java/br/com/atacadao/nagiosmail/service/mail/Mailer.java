@@ -46,7 +46,7 @@ public class Mailer implements Correio {
 
 				helper.setText(email.getTemplate().getHtml(), true);
 
-				for (FileSystemResource res : email.getTemplate().getImages()) {
+				for (FileSystemResource res : email.getTemplate().getImages()) {					
 					helper.addInline(res.getFilename(), res);
 				}
 			}

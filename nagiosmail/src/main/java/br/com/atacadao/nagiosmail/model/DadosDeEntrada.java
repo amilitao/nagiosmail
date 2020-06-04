@@ -36,7 +36,7 @@ public class DadosDeEntrada {
 
 		for (String s : dados.subList(3, dados.size())) {
 
-			String[] m = s.split("#");
+			String[] m = s.split("=");
 			lista.add(new Macro(m[0], m[1]));
 
 		}
