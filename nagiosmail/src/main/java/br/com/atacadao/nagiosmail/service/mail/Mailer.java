@@ -35,9 +35,9 @@ public class Mailer implements Correio {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 
 				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-
+			
 				helper.setFrom(email.getFrom());
-
+				
 				for (String to : email.getTo()) {
 					helper.addTo(to);
 				}

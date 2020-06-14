@@ -38,7 +38,7 @@ public class Template {
 	private Path getFileTemplate() {
 
 		FileSystemResource res = new FileSystemResource(
-				new File("/usr/local/nagiosql/nagiosmail/templates/" + diretorio + "/html/template.html"));
+				new File("c:/usr/local/nagiosql/nagiosmail/templates/" + diretorio + "/html/template.html"));
 
 		return Paths.get(res.getPath());
 
@@ -59,7 +59,7 @@ public class Template {
 		List<FileSystemResource> resources = new ArrayList<>();
 
 		FileSystemResource res = new FileSystemResource(
-				new File("/usr/local/nagiosql/nagiosmail/templates/" + this.diretorio + "/images/"));
+				new File("c:/usr/local/nagiosql/nagiosmail/templates/" + this.diretorio + "/images/"));
 
 		File[] files = res.getFile().listFiles();
 
@@ -69,6 +69,11 @@ public class Template {
 
 		return resources;
 
+	}
+
+	@Override
+	public String toString() {
+		return "Template [diretorio=" + diretorio + ", macros=" + macros + ", charset=" + charset + "]";
 	}
 
 }

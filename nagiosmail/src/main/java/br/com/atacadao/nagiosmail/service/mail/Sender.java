@@ -17,7 +17,7 @@ public class Sender {
 		Properties mailProperties = new Properties();
 		mailProperties.put("mail.smtp.auth", false);
 		mailProperties.put("mail.smtp.starttls.enable", false);
-		mailProperties.put("mail.debug", "false");// Prints out everything on screen
+		mailProperties.put("mail.debug", "true");// Prints out everything on screen
 
 		mailSender.setJavaMailProperties(mailProperties);
 

@@ -13,19 +13,16 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Correio correio = new Mailer(Sender.getMailSender());
+		Correio correio = new Mailer(Sender.getMailSender());		
 		
 		
-		/*
-		 * String[] vars = {"adrianomilitao@atacadao.com.br",
-		 * "Este campo será o assunto", "host-template", "NOTIFICATIONTYPE#PROBLEM"};
-		 */
-		 
+		  String[] vars = {"adrianomilitao@atacadao.com.br",
+		  "Este campo será o assunto", "host-template", "NOTIFICATIONTYPE#PROBLEM"};			 
 		 
 
 		try {
 
-			DadosDeEntrada dados = new DadosDeEntrada(Arrays.asList(args));
+			DadosDeEntrada dados = new DadosDeEntrada(Arrays.asList(vars));
 
 			Template template = new Template(dados.getNomeTemplate(), dados.getMacros());
 
@@ -34,7 +31,7 @@ public class Main {
 			correio.send(email);
 
 			System.out.println("RESULTADO: Email enviado com sucesso!");
-			System.out.println("DADOS: " + dados);
+			System.out.println("DADOS: " + dados);	
 
 		} catch (Exception e) {
 			e.printStackTrace();

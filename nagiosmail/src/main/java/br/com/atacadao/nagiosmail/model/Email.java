@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Email {
 
-	private String from = "nagios@srvnagiosprd.localdomain";
+	private String from = "srvnagiosprd@atacadao.com.br";
 	private List<String> to;
 	private String subject;
 	private Template template;	
